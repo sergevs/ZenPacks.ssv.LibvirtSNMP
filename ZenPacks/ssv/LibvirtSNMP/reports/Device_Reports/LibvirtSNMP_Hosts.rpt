@@ -7,8 +7,8 @@
     tableState python:tm.getTableState(tableName, sortedSence='desc', sortedHeader='outputP');
     objects python:here.ReportServer.plugin('LibvirtSNMP_plugin', tableState);
     objects python: (hasattr(request, 'doExport') and list(objects)) or objects;
-    batch python:here.ZenTableManager.getBatch(tableName,objects,sortedHeader='device', sortedSence='asc');
-    exportFields python:['device', 'guestName', 'guestUrl', 'guestCpuCount', 'guestMemory'];
+    batch python:here.ZenTableManager.getBatch(tableName, objects, sortedHeader='deviceName', sortedSence='asc');
+    exportFields python:['deviceName', 'guestName', 'guestUrl', 'guestCpuCount', 'guestMemory'];
     ">
 
 <!-- Make the report exportable to CSV -->
@@ -22,15 +22,8 @@
 
 <tal:block metal:fill-slot="contentPane">
 
-        <form id="searchHostSelection" method="submit">
-          <table class="zentable">
-                <tr>
-                  <td class="tableheader" rowspan="1">Virtual Hosts Filter:</td>
-                  <td><input class="tablevalues" name="searchHost" tal:attributes="value searchHost"/></td>
-                  <td><input class="tablevalues" type="Submit" value="Update"/></td>
-                </tr>
-          </table>
-        </form>
+<form method="POST" tal:attributes="action request/URL; name string:hostlist"
+            tal:define="tabletitle string:LibvirtSNMP Hosts; showfilterbox python:True; tblcolspan string:3">
 
 <tal:block metal:use-macro="here/zenuimacros/macros/zentable">
 <tal:block metal:fill-slot="zentablecontents">
@@ -38,7 +31,7 @@
         <!-- Define Column Headers - Clickable for Sorting -->
         <th tal:replace="
             structure python:here.ZenTableManager.getTableHeader(
-                tableName,'device','Host Name')"/>
+                tableName,'deviceName','Host Name')"/>
 
         <th tal:replace="
             structure python:here.ZenTableManager.getTableHeader(
@@ -53,7 +46,6 @@
                 tableName,'guestMemory','Current Memory')"/>
     </tr>
 
-    <form method="POST" tal:attributes="action request/URL;">
 
       <tal:block tal:repeat="r batch">
         <!-- Define Per-Row Display -->
@@ -75,7 +67,6 @@
            <td tal:content="r/guestMemory"/>
         </tr>
     </tal:block>
-    </form>
     <tr>
         <!-- Update colspan to match your columns -->
         <td colspan="4" class="tableheader" align='center'>
@@ -84,8 +75,9 @@
     </tr>
 </tal:block>
 </tal:block>
-</tal:block>
+</form>
 
+</tal:block>
 </tal:block>
 </tal:block>
 </tal:block>
