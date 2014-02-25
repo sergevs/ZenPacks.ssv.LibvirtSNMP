@@ -60,11 +60,11 @@
                 </td> 
               </tal:then> 
               <tal:else condition="not: cond"> 
-                <td tal:content="r/guestName"/>
+                <td class="tablevalues" tal:content="r/guestName"/>
               </tal:else> 
            </tal:if> 
-           <td tal:content="r/guestCpuCount"/>
-           <td tal:content="r/guestMemory"/>
+           <td class="tablevalues" tal:content="r/guestCpuCount"/>
+           <td class="tablevalues" tal:content="r/guestMemory"/>
         </tr>
     </tal:block>
     <tr>
