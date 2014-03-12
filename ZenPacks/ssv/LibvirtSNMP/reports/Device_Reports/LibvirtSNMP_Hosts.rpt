@@ -44,6 +44,10 @@
         <th tal:replace="
             structure python:here.ZenTableManager.getTableHeader(
                 tableName,'guestMemory','Current Memory')"/>
+
+        <th tal:replace="
+            structure python:here.ZenTableManager.getTableHeader(
+                tableName,'guestStatus','State')"/>
     </tr>
 
 
@@ -65,6 +69,7 @@
            </tal:if> 
            <td class="tablevalues" tal:content="r/guestCpuCount"/>
            <td class="tablevalues" tal:content="r/guestMemory"/>
+           <td class="tablevalues" tal:content="r/guestStatus"/>
         </tr>
     </tal:block>
     <tr>

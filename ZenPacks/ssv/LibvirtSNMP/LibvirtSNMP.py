@@ -86,9 +86,16 @@ class LibvirtSNMP(Service):
     Return the status number for this component.
     """
    # Unknown status if we're not monitoring the interface.
-    if self.snmpIgnore():
-            return -1
-    return 0
+    if self.snmpIgnore(): 
+      return -1
+    s = self.cacheRRDValue('libvirtGuestState', -1)
+    if s and s in range(1,6):
+      return s
+    else:
+      return -1
+
+  def convertStatus(self, status):
+    return {-1:'Unknown',1:'Running',2:'Blocked',3:'Paused',4:'Shutdown',5:'ShutOff',6:'Crashed'}[status]
 
   # must be to map events to componet
   def viewName(self): 

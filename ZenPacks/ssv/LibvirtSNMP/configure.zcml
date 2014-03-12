@@ -7,11 +7,20 @@
         <browser:resourceDirectory
                  name="libvirtsnmp"
                  directory="browser/resources"
-                 />
+        />
+
+        <browser:viewlet
+                 name="js-libvirtsnmp"
+                 paths="/++resource++libvirtsnmp/js/LibvirtSNMP.js"
+                 weight="10"
+                 manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                 class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                 permission="zope2.Public"
+        />
+
         <adapter factory=".info.LibvirtSNMPInfo"
                  for=".LibvirtSNMP.LibvirtSNMP"
                  provides=".interfaces.ILibvirtSNMPInfo"
         />
     </configure>
 </configure>
-

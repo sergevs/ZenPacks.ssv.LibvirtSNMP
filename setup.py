@@ -3,7 +3,7 @@
 # or saved.  Do not modify them directly here.
 # NB: PACKAGES is deprecated
 NAME = "ZenPacks.ssv.LibvirtSNMP"
-VERSION = "1.1.0"
+VERSION = "1.1.1"
 AUTHOR = "Serge"
 LICENSE = "GPLv3"
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.ssv']
